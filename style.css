@@ -1,46 +1,108 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap');
+
+:root {
+  --border-color: #97b5f3;
+  --fill-color: #79f332;
 }
 
-body{
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #ffffff;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #eef8f7;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+    color: black;
+  margin: 10px 0 0;
+}
+
+h3 {
+    color: black;
+  font-weight: 400;
+  margin: 10px 0;
+}
+
+.cup {
+  background-color: #fff;
+  border: 4px solid var(--border-color);
+  color: var(--border-color);
+  border-radius: 0 0 40px 40px;
+  height: 330px;
+  width: 150px;
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cup.cup-small {
+  height: 95px;
+  width: 50px;
+  border-radius: 0 0 15px 15px;
+  background-color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 5px;
+  transition: 0.3s ease;
+}
+
+.cup.cup-small.full {
+    width: 20px;
+  background-color: var(--fill-color);
+  color: #fff;
+}
+
+.cups {
     display: flex;
-    justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    flex-direction: column;
+    justify-content: center;
+   /* width: 280px;*/
+    margin-right: 20px;
+    gap: 30px;
+  }
+.remained {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+  transition: 0.3s ease;
 }
 
-.stopwatch{
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: 20px 24px;
-    border-radius: 10px;
-    
+.remained span {
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.timerDisplay{
-    display: flex;
-    
-    font-size: 50px;
-    font-weight: 600;
+.remained small {
+  font-size: 12px;
 }
 
-.buttons{
-    margin-top: 20px;
+.percentage {
+  background-color: var(--fill-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 30px;
+  height: 0;
+  transition: 0.3s ease;
 }
 
-.btn{
-    font-size: 20px;
-    background: none;
-    border: none;
-    color: #fff;
-    background-color: var(--clr);
-    padding: 12px 24px;
-    margin-inline: 12px;
-    border-radius: 8px;
-    cursor: pointer;
+.text {
+    color: black;
+  text-align: center;
+  margin: 0 0 5px;
 }

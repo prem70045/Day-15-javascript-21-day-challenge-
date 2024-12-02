@@ -1,47 +1,49 @@
-let timerDisplay = document.querySelector('.timerDisplay');
-let stopBtn = document.getElementById('stopBtn');
-let startBtn = document.getElementById('startBtn');
-let resetBtn = document.getElementById('resetBtn');
+const smallCups = document.querySelectorAll('.cup-small')
+const liters = document.getElementById('liters')
+const percentage = document.getElementById('percentage')
+const remained = document.getElementById('remained')
 
-let msec = 00;
-let secs = 00;
-let mins = 00;
+updateBigCup()
 
-let timerId = null;
+smallCups.forEach((cup, idx) => {
+    cup.addEventListener('click', () => highlightCups(idx))
+})
 
-startBtn.addEventListener('click', function(){
-    if(timerId !== null){
-        clearInterval(timerId);
+function highlightCups(idx) {
+    if (idx===7 && smallCups[idx].classList.contains("full")) idx--;
+    else if(smallCups[idx].classList.contains('full') && !smallCups[idx].nextElementSibling.classList.contains('full')) {
+        idx--
     }
-    timerId = setInterval(startTimer, 10);
-});
 
-stopBtn.addEventListener('click', function(){
-    clearInterval(timerId);
-});
-
-resetBtn.addEventListener('click', function(){
-    clearInterval(timerId);
-    timerDisplay.innerHTML = `00 : 00 : 00`;
-    msec = secs = mins = 00;
-});
-
-function startTimer(){
-    msec++;
-    if(msec == 100){
-        msec = 0;
-        secs++;
-        if(secs == 60){
-            secs = 0;
-mins++;
+    smallCups.forEach((cup, idx2) => {
+        if(idx2 <= idx) {
+            cup.classList.add('full')
+        } else {
+            cup.classList.remove('full')
         }
+    })
+
+    updateBigCup()
+}
+
+function updateBigCup() {
+    const fullCups = document.querySelectorAll('.cup-small.full').length
+    const totalCups = smallCups.length
+
+    if(fullCups === 0) {
+        percentage.style.visibility = 'hidden'
+        percentage.style.height = 0
+    } else {
+        percentage.style.visibility = 'visible'
+        percentage.style.height = `${fullCups / totalCups * 330}px`
+        percentage.innerText = `${fullCups / totalCups * 100}%`
     }
 
-    let msecString = msec < 10 ? `0${msec}` : msec;
-    let secsString = secs < 10 ? `0${secs}` : secs;
-    let minsString = mins < 10 ? `0${mins}` : mins;
-    
-
-    timerDisplay.innerHTML = `${minsString} : ${secsString} : ${msecString}`;
-
+    if(fullCups === totalCups) {
+        remained.style.visibility = 'hidden'
+        remained.style.height = 0
+    } else {
+        remained.style.visibility = 'visible'
+        liters.innerText = `${2 - (250 * fullCups / 1000)}L`
+    }
 }
